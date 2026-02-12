@@ -49,7 +49,6 @@ class CustomText extends StatelessWidget {
       ).copyWith(decoration: decoration, letterSpacing: letterSpacing, height: lineHeight),
     );
 
-    // ✅ If gradient is provided, wrap with ShaderMask
     if (gradient != null) {
       return ShaderMask(
         shaderCallback: (bounds) =>

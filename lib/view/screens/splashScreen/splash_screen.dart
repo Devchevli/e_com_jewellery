@@ -1,8 +1,8 @@
 import 'package:jewellery/core/theme/app_imports.dart';
 import 'package:jewellery/core/utils/custom_assets.dart';
 import 'package:jewellery/core/widgets/custom_text.dart';
+import 'package:jewellery/provider/splashScreenProvider/splash_provider.dart';
 import 'package:jewellery/view/screens/onboarding_screen/onboarding_screen.dart';
-import '../../../provider/splash_screen_provider/splash_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       if (!mounted) return;
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (_) => const OnboardingScreen()),
+        MaterialPageRoute(builder: (_) => OnboardingScreen()),
         (route) => false,
       );
     });

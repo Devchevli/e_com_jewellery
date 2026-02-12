@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:jewellery/provider/splash_screen_provider/splash_provider.dart';
+import 'package:jewellery/provider/onboardingProvider/onboarding_provider.dart';
+import 'package:jewellery/provider/splashScreenProvider/splash_provider.dart';
 import 'package:jewellery/view/screens/splashScreen/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,10 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MultiProvider(
-          providers: [ChangeNotifierProvider(create: (_) => SplashProvider())],
+          providers: [
+            ChangeNotifierProvider(create: (_) => SplashProvider()),
+            ChangeNotifierProvider(create: (_) => OnboardingProvider()),
+          ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             builder: (context, child) {
