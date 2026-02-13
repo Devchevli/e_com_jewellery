@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:jewellery/core/theme/app_imports.dart';
+import 'package:jewellery/core/widgets/custom_scroll.dart';
 import 'section_title.dart';
 
 class FeaturedGridSection extends StatefulWidget {
@@ -29,35 +30,39 @@ class _FeaturedGridSectionState extends State<FeaturedGridSection> {
     final products = List.generate(8, (index) => index);
 
     return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 100),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SectionTitle(
-              title: "Featured Picks",
-              subtitle: "Curated with timeless precision.",
-            ),
+      child: ScrollReveal(
+        beginOffset: const Offset(0, 0.3),
 
-            const SizedBox(height: 40),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: products.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 40,
-                ),
-                itemBuilder: (context, index) {
-                  return _FeaturedCard(index: index);
-                },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 100),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SectionTitle(
+                title: "Featured Picks",
+                subtitle: "Curated with timeless precision.",
               ),
-            ),
-          ],
+
+              const SizedBox(height: 40),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: products.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 40,
+                  ),
+                  itemBuilder: (context, index) {
+                    return _FeaturedCard(index: index);
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -142,23 +147,20 @@ class _FeaturedCardState extends State<_FeaturedCard> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    const CustomText(
                       "Signature Piece",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
+
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
                     ),
 
                     const SizedBox(height: 6),
 
-                    Text(
+                    CustomText(
                       "₹ 8,499",
-                      style: TextStyle(
-                        color: CustomColor.yellowPrimary,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      color: CustomColor.yellowPrimary,
+                      fontWeight: FontWeight.w600,
                     ),
                   ],
                 ),

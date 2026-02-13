@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jewellery/core/theme/app_imports.dart';
+import 'package:jewellery/core/widgets/custom_searchbar.dart';
+import 'package:jewellery/view/screens/home_screen/widgets/campagin_banner.dart';
 import 'package:jewellery/view/screens/home_screen/widgets/category_section.dart';
 import 'package:jewellery/view/screens/home_screen/widgets/featured_grid_section.dart';
 import 'package:jewellery/view/screens/home_screen/widgets/hero_section.dart';
@@ -47,6 +49,21 @@ class HomeScreen extends StatelessWidget {
             physics: const ClampingScrollPhysics(),
             slivers: [
               const SliverToBoxAdapter(child: HeroSection()),
+              SliverToBoxAdapter(child: MinimalSearchBar()),
+              CampaignCarousel(
+                banners: [
+                  {
+                    "image": CustomAssets.onboardingEight,
+                    "title": "Rare Collection 2025",
+                    "subtitle": "Crafted for Presence",
+                  },
+                  {
+                    "image": CustomAssets.onboardingFive,
+                    "title": "Signature Drop",
+                    "subtitle": "Only a few exist",
+                  },
+                ],
+              ),
 
               SliverToBoxAdapter(
                 child: Stack(

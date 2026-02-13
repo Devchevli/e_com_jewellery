@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:jewellery/core/theme/app_imports.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'section_title.dart';
 
 class TrendingSection extends StatefulWidget {
@@ -12,6 +13,7 @@ class TrendingSection extends StatefulWidget {
 
 class _TrendingSectionState extends State<TrendingSection> {
   final PageController _pageController = PageController(viewportFraction: 0.78);
+  bool _isVisible = false;
 
   double currentPage = 0;
 
@@ -30,40 +32,65 @@ class _TrendingSectionState extends State<TrendingSection> {
     final products = List.generate(5, (index) => index);
 
     return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 80),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SectionTitle(title: "Trending Now", subtitle: "Bold pieces defining presence."),
+      child: VisibilityDetector(
+        key: const Key("trending-section"),
+        onVisibilityChanged: (info) {
+          if (info.visibleFraction > 0.3 && !_isVisible) {
+            setState(() {
+              _isVisible = true;
+            });
+          }
+        },
 
-            const SizedBox(height: 40),
+        child: AnimatedSlide(
+          offset: _isVisible ? Offset.zero : const Offset(-0.3, 0),
+          duration: const Duration(seconds: 2),
+          curve: Curves.easeOutCubic,
 
-            SizedBox(
-              height: 460,
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: products.length,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  final difference = (currentPage - index);
-                  final scale = (1 - (difference.abs() * 0.15)).clamp(0.8, 1.0);
-                  final opacity = (1 - (difference.abs() * 0.3)).clamp(0.4, 1.0);
+          child: AnimatedOpacity(
+            opacity: _isVisible ? 1 : 0,
+            duration: const Duration(seconds: 2),
 
-                  return Transform.scale(
-                    scale: scale,
-                    child: Opacity(
-                      opacity: opacity,
-                      child: _AnimatedTrendingCard(
-                        isFocused: difference.abs() < 0.5,
-                        pageOffset: difference,
-                      ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 80),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SectionTitle(
+                    title: "Trending Now",
+                    subtitle: "Bold pieces defining presence.",
+                  ),
+
+                  const SizedBox(height: 40),
+
+                  SizedBox(
+                    height: 460,
+                    child: PageView.builder(
+                      controller: _pageController,
+                      itemCount: products.length,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final difference = (currentPage - index);
+                        final scale = (1 - (difference.abs() * 0.15)).clamp(0.8, 1.0);
+                        final opacity = (1 - (difference.abs() * 0.3)).clamp(0.4, 1.0);
+
+                        return Transform.scale(
+                          scale: scale,
+                          child: Opacity(
+                            opacity: opacity,
+                            child: _AnimatedTrendingCard(
+                              isFocused: difference.abs() < 0.5,
+                              pageOffset: difference,
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
+                  ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

@@ -12,4 +12,5 @@ class CustomAssets {
   static const String onboardingNine = '${images}onboarding_nine.jpeg';
   static const String onboardingTen = '${images}onboarding_ten.jpeg';
   static const String onboardingEleven = '${images}onboarding_eleven.jpg';
+  static const String chain = '${images}chain.png';
 }

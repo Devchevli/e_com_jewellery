@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jewellery/core/theme/app_imports.dart';
 import 'package:jewellery/provider/onboardingProvider/onboarding_provider.dart';
 import 'package:jewellery/provider/splashScreenProvider/splash_provider.dart';
+import 'package:jewellery/view/screens/bottom_bar_screen/main_wrapper_screen.dart';
+import 'package:jewellery/view/screens/product_detail_screen/product_detail_screen.dart';
+import 'package:jewellery/view/screens/product_detail_screen/widgets/product_3d_demo_screen.dart';
 import 'package:jewellery/view/screens/splashScreen/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +40,8 @@ class MyApp extends StatelessWidget {
                 child: child!,
               );
             },
-            home: SplashScreen(),
+            // home: ProductDetailsScreen(images: [CustomAssets.chain, CustomAssets.onboardingTwo]),
+            home: RoyalStageDemoScreen(),
           ),
         );
       },

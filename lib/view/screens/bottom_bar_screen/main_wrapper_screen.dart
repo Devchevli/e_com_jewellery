@@ -1,7 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:jewellery/core/theme/app_imports.dart';
+import 'package:jewellery/view/screens/categories_screen/categories_screen.dart';
 import 'package:jewellery/view/screens/home_screen/home_screen.dart';
+import 'package:jewellery/view/screens/profile_screen/profile_screen.dart';
+import 'package:jewellery/view/screens/wishlist_screen/wishlist_screen.dart';
 
 class MainWrapperScreen extends StatefulWidget {
   const MainWrapperScreen({super.key});
@@ -15,9 +18,9 @@ class _MainWrapperScreenState extends State<MainWrapperScreen> {
 
   final List<Widget> pages = [
     const HomeScreen(), // HomeScreen
-    const Placeholder(), // CategoriesScreen
-    const Placeholder(), // WishlistScreen
-    const Placeholder(), // ProfileScreen
+    const CategoriesScreen(), // CategoriesScreen
+    const WishlistScreen(), // WishlistScreen
+    const ProfileScreen(), // ProfileScreen
   ];
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:jewellery/core/theme/app_imports.dart';
+import 'package:jewellery/core/widgets/custom_scroll.dart';
 import 'section_title.dart';
 
 class LimitedDropSection extends StatefulWidget {
@@ -30,79 +31,81 @@ class _LimitedDropSectionState extends State<LimitedDropSection>
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 140),
-        child: Column(
-          children: [
-            /// Ultra thin heading
-            Text(
-              "LIMITED",
-              style: TextStyle(
+      child: ScrollReveal(
+        beginOffset: const Offset(0, 0.1),
+        duration: const Duration(milliseconds: 1200),
+
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 140),
+          child: Column(
+            children: [
+              CustomText(
+                "LIMITED",
+
                 letterSpacing: 6,
                 fontSize: 14,
                 color: CustomColor.yellowPrimary,
                 fontWeight: FontWeight.w400,
+              ).animate().fadeIn(duration: 1000.ms).slideY(begin: 0.2),
+
+              const SizedBox(height: 60),
+
+              /// Centered rare image with breathing zoom
+              AnimatedBuilder(
+                animation: _zoomController,
+                builder: (context, child) {
+                  double scale = 1 + (_zoomController.value * 0.04);
+                  return Transform.scale(
+                    scale: scale,
+                    child: Container(
+                      width: 260,
+                      height: 260,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: CustomColor.yellowPrimary.withOpacity(0.15),
+                            blurRadius: 80,
+                          ),
+                        ],
+                      ),
+                      child: ClipOval(
+                        child: Image.asset(CustomAssets.onboardingOne, fit: BoxFit.cover),
+                      ),
+                    ),
+                  );
+                },
               ),
-            ).animate().fadeIn(duration: 1000.ms).slideY(begin: 0.2),
 
-            const SizedBox(height: 60),
+              const SizedBox(height: 60),
 
-            /// Centered rare image with breathing zoom
-            AnimatedBuilder(
-              animation: _zoomController,
-              builder: (context, child) {
-                double scale = 1 + (_zoomController.value * 0.04);
-                return Transform.scale(
-                  scale: scale,
-                  child: Container(
-                    width: 260,
-                    height: 260,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: CustomColor.yellowPrimary.withOpacity(0.15),
-                          blurRadius: 80,
-                        ),
-                      ],
-                    ),
-                    child: ClipOval(
-                      child: Image.asset(CustomAssets.onboardingOne, fit: BoxFit.cover),
-                    ),
-                  ),
-                );
-              },
-            ),
+              CustomText(
+                "Signature Rare Collection",
 
-            const SizedBox(height: 60),
-
-            Text(
-              "Signature Rare Collection",
-              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
-              ),
-            ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
+              ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
 
-            const SizedBox(height: 12),
+              const SizedBox(height: 12),
 
-            Text(
-              "Only 12 crafted worldwide",
-              style: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.7)),
-            ).animate().fadeIn(delay: 600.ms),
+              CustomText(
+                "Only 12 crafted worldwide",
+                fontSize: 14,
+                color: Colors.white.withOpacity(0.7),
+              ).animate().fadeIn(delay: 600.ms),
 
-            const SizedBox(height: 30),
+              const SizedBox(height: 30),
 
-            Text(
-              "₹ 24,999",
-              style: TextStyle(
+              CustomText(
+                "₹ 24,999",
+
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
                 color: CustomColor.yellowPrimary,
-              ),
-            ).animate().fadeIn(delay: 800.ms),
-          ],
+              ).animate().fadeIn(delay: 800.ms),
+            ],
+          ),
         ),
       ),
     );
