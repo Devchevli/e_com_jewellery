@@ -117,6 +117,7 @@ class RoyalStageDemoScreenState extends State<RoyalStageDemoScreen>
                         colors: [Colors.white.withOpacity(0.4), Colors.transparent],
                       ).createShader(bounds);
                     },
+
                     blendMode: BlendMode.dstIn,
                     child: Transform(
                       alignment: Alignment.center,
